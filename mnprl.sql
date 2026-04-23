@@ -99,3 +99,16 @@ HAVING COUNT(b.book_id) >= 2;
 SELECT *
 FROM Book
 WHERE price > (SELECT AVG(price) FROM Book);
+SELECT *
+FROM Book
+WHERE book_id IN (
+    SELECT DISTINCT book_id
+    FROM BookOrder
+);
+SELECT *
+FROM Book b1
+WHERE price = (
+    SELECT MAX(price)
+    FROM Book b2
+    WHERE b1.category_id = b2.category_id
+);
